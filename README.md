@@ -1,3 +1,3 @@
 # hello-world
-just another repository by rbtadikonda
+just another repo by rbtadikonda
 in readme-edit branch
