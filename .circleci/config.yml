@@ -11,6 +11,16 @@ commands:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
+  say-hello-error:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: exit 1
+      - run: 
+          name: on error
+          command: echo "Hello Error!"
+          when: on_fail
+      
   say-hello:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
@@ -58,6 +68,7 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
+      - say-hello-error
       - say-hello
       - print_world:
          requires:
