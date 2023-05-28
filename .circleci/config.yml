@@ -2,6 +2,12 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    description: "Print Pipeline ID"
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+      
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -37,7 +43,14 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: cat ~/output.txt     
+      - run: cat ~/output.txt
+  print_pipeline_id_job:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - print_pipe_line_id
+    
+    
           
 
 # Orchestrate jobs using workflows
@@ -53,4 +66,5 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+      - print_pipeline_id_job
         
