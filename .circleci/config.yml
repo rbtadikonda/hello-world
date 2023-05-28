@@ -28,7 +28,7 @@ jobs:
     steps:
       - run: echo "hello world to an outputfile" > ~/output.txt
       - persist_to_workspace:
-          root: ~
+          root: ~/
           paths:
             - output.txt
   print_output_file:
